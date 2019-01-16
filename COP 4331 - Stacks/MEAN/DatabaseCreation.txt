@@ -1,0 +1,27 @@
+use COP4331
+
+db.Users.insertMany([
+  {FirstName: "Rick", LastName: "Leinecker", Login: "RickL", Password: "COP4331" },
+  {FirstName: "Sam", LastName: "Hill", Login: "SamH", Password: "Test" }
+])
+
+db.Colors.insertMany([
+  {Name: "Blue", UserId: 1},
+  {Name: "White", UserId: 1},
+  {Name: "Black", UserId: 1},
+  {Name: "gray", UserId: 1},
+  {Name: "Magenta", UserId: 1},
+  {Name: "Yellow", UserId: 1},
+  {Name: "Cyan", UserId: 1},
+  {Name: "Salmon", UserId: 1},
+  {Name: "Chartreuse", UserId: 1},
+  {Name: "Lime", UserId: 1},
+  {Name: "Light Blue", UserId: 1},
+  {Name: "Light Gray", UserId: 1},
+  {Name: "Light Red", UserId: 1},
+  {Name: "Light Green", UserId: 1},
+  {Name: "Chiffon", UserId: 1},
+  {Name: "Fuscia", UserId: 1},
+  {Name: "Brown", UserId: 1},
+  {Name: "Beige", UserId: 1}
+])

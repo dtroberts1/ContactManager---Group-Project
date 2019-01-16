@@ -1,0 +1,82 @@
+USE [COP4331]
+GO
+
+/****** Object:  Table [dbo].[Users]    Script Date: 01/10/2018 13:27:38 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Users](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[DateCreated] [datetime] NOT NULL,
+	[DateLastLoggedIn] [datetime] NOT NULL,
+	[FirstName] [nvarchar](50) NOT NULL,
+	[LastName] [nvarchar](50) NOT NULL,
+	[Login] [nvarchar](50) NOT NULL,
+	[Password] [nvarchar](50) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
+GO
+
+ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_DateLastLoggedIn]  DEFAULT (getdate()) FOR [DateLastLoggedIn]
+GO
+
+ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_FirstName]  DEFAULT ('') FOR [FirstName]
+GO
+
+ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_LastName]  DEFAULT ('') FOR [LastName]
+GO
+
+ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_Login]  DEFAULT ('') FOR [Login]
+GO
+
+ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_Password]  DEFAULT ('') FOR [Password]
+GO
+
+insert into Users (FirstName,LastName,Login,Password) VALUES ('Rick','Leinecker','RickL','COP4331')
+insert into Users (FirstName,LastName,Login,Password) VALUES ('Sam','Hill','SamH','Test')
+
+USE [COP4331]
+GO
+
+/****** Object:  Table [dbo].[Colors]    Script Date: 01/10/2018 13:48:19 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Colors](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[Colors] ADD  CONSTRAINT [DF_Colors_Name]  DEFAULT ('') FOR [Name]
+GO
+
+insert into Colors (Name) VALUES ('Blue')
+insert into Colors (Name) VALUES ('White')
+insert into Colors (Name) VALUES ('Black')
+insert into Colors (Name) VALUES ('gray')
+insert into Colors (Name) VALUES ('Magenta')
+insert into Colors (Name) VALUES ('Yellow')
+insert into Colors (Name) VALUES ('Cyan')
+insert into Colors (Name) VALUES ('Salmon')
+insert into Colors (Name) VALUES ('Chartreuse')
+insert into Colors (Name) VALUES ('Lime')
+insert into Colors (Name) VALUES ('Light Blue')
+insert into Colors (Name) VALUES ('Light Gray')
+insert into Colors (Name) VALUES ('Light Red')
+insert into Colors (Name) VALUES ('Light Green')
+insert into Colors (Name) VALUES ('Chiffon')
+insert into Colors (Name) VALUES ('Fuscia')
+insert into Colors (Name) VALUES ('Brown')
+insert into Colors (Name) VALUES ('Beige')
+
