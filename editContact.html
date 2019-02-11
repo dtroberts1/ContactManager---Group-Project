@@ -1,0 +1,175 @@
+<head>
+  <link href="signupcss.css" rel="stylesheet" id="bootstrap-css">
+    <script src="js.cookie.js"></script>
+
+</head>
+
+<!------ Include the above in your HEAD tag ---------->
+<body id="testingid" onload="fillInputs()">
+  <div class="signup-wrap" style="width:100%">
+	<div class="signup-html" id="signupDiv">
+		<label id="editLable" for="tab-1" class="tab">Contact Info</label><span id="testingOutput"></span>
+		
+		<div class="signup-form">
+			<div class="sign-in-htm">
+			    <!-- First 2 spans (before table) identify the ContactID and LinkedUser. They are not viewable -->
+			    
+    <span id="ContactID" style="display: none"></span>
+    <span id="LinkedUser" style="display: none"></span>	
+
+			<form id="editingForm" tabindex="-1"> 
+				<table class="tableEditContact">
+				    
+					<tr >
+					  
+						<td class="td1"><label for="user" class="label1">First Name</label></td>
+						<td class="td2"><input type="text" id="edit_firstname" disabled="disabled" class="input"></td> 
+               <!--         <td class="td2"><input type="text" id="edit_firstname" class="input"></td> -->
+						<!-- This pencil icon is From https://icons8.com/icon/set/edit/metro -->
+						<td></td>  <!-- for an edit image -->
+						<td class="td1"><label for="user" class="label1">Last Name</label></td>
+						<td class="td2"><input id="edit_lastname" disabled="disabled" type="text" class="input"></td>
+						<!-- This pencil icon is From https://icons8.com/icon/set/edit/metro -->						
+						<td><svg onClick='editField("input")' class="editPencil" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"width="26" height="26" viewBox="0 0 224 224" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,224v-224h224v224z" fill="none"></path><g id="Layer_1"><g fill="#ffffff"><g><g><g><path d="M155.75,222.25h-70c-2.975,0 -5.25,-2.275 -5.25,-5.25c0,-2.975 2.275,-5.25 5.25,-5.25h70c2.975,0 5.25,2.275 5.25,5.25c0,2.975 -2.275,5.25 -5.25,5.25z"></path></g></g></g><g><g><g><circle cx="104" cy="124" transform="scale(1.75,1.75)" r="3"></circle></g></g></g></g><g><g fill="#ffffff"><g><g><path d="M148.225,68.425l-65.275,112.7c-5.425,9.45 -12.95,17.5 -22.05,23.45l-18.9,12.425l1.4,-22.575c0.7,-10.85 3.85,-21.35 9.275,-30.8l65.275,-112.7"></path></g></g></g><g fill="#ffffff"><g><g><path d="M105.7,77.175c-0.875,0 -1.75,-0.175 -2.625,-0.7c-2.45,-1.4 -3.325,-4.725 -1.925,-7.175l12.25,-21c1.4,-2.45 4.725,-3.325 7.175,-1.925c2.45,1.4 3.325,4.725 1.925,7.175l-12.25,21c-1.05,1.575 -2.8,2.625 -4.55,2.625z"></path></g></g></g><g fill="#ffffff"><g><g><path d="M135.975,94.675c-0.875,0 -1.75,-0.175 -2.625,-0.7c-2.45,-1.4 -3.325,-4.725 -1.925,-7.175l12.25,-21c1.4,-2.45 4.725,-3.325 7.175,-1.925c2.45,1.4 3.325,4.725 1.925,7.175l-12.25,21c-1.05,1.575 -2.8,2.625 -4.55,2.625z"></path></g></g></g><g fill="#fcca3d"><g><g><path d="M82.6,165.9c-0.875,0 -1.75,-0.175 -2.625,-0.7c-2.45,-1.4 -3.325,-4.725 -1.925,-7.175l43.75,-75.95c1.4,-2.45 4.55,-3.15 7.175,-1.925c9.8,4.725 9.8,4.725 9.8,4.725l-51.45,78.575c-1.05,1.75 -2.975,2.45 -4.725,2.45z"></path></g></g></g><g fill="#ffffff"><g><g><path d="M42,222.25c-0.875,0 -1.75,-0.175 -2.625,-0.7c-1.75,-1.05 -2.8,-2.8 -2.625,-4.9l1.4,-22.575c0.7,-11.55 4.2,-23.1 9.975,-33.075l53.025,-91.7c1.4,-2.45 4.725,-3.325 7.175,-1.925c2.45,1.4 3.325,4.725 1.925,7.175l-53.025,91.7c-5.075,8.575 -7.875,18.55 -8.575,28.525l-0.7,12.075l10.15,-6.65c8.4,-5.425 15.4,-12.95 20.475,-21.7l53.025,-91.7c1.4,-2.45 4.725,-3.325 7.175,-1.925c2.45,1.4 3.325,4.725 1.925,7.175l-53.2,91.7c-5.775,10.15 -14,18.725 -23.625,25.2l-18.9,12.425c-0.875,0.525 -1.925,0.875 -2.975,0.875z"></path></g></g></g><g fill="#ff5576"><g><g><path d="M153.475,64.225c-0.875,0 -1.75,-0.175 -2.625,-0.7c-2.45,-1.4 -3.325,-4.725 -1.925,-7.175c1.575,-2.8 2.1,-6.125 1.225,-9.275c-0.875,-3.15 -2.8,-5.775 -5.775,-7.35c-2.8,-1.575 -6.125,-2.1 -9.275,-1.225c-3.15,0.875 -5.775,2.8 -7.525,5.775c-1.4,2.45 -4.725,3.325 -7.175,1.925c-2.45,-1.4 -3.325,-4.725 -1.925,-7.175c6.3,-10.85 20.3,-14.525 31.15,-8.4c5.25,2.975 9.1,7.875 10.675,13.825c1.575,5.95 0.7,12.075 -2.275,17.325c-1.05,1.575 -2.8,2.45 -4.55,2.45z"></path></g></g></g><g fill="#ff5576"><g><g><path d="M153.475,58.975c4.9,-8.4 1.925,-19.075 -6.475,-23.975v0c-8.4,-4.9 -19.075,-1.925 -23.975,6.475l-6.475,11.375l30.275,17.5z"></path></g></g><g><g><path d="M146.825,75.6c-0.875,0 -1.75,-0.175 -2.625,-0.7l-30.275,-17.5c-1.225,-0.7 -2.1,-1.925 -2.45,-3.15c-0.35,-1.4 -0.175,-2.8 0.525,-4.025l6.475,-11.375c6.3,-10.85 20.3,-14.525 31.15,-8.4c5.25,2.975 9.1,7.875 10.675,13.825c1.575,5.95 0.7,12.075 -2.275,17.325l-6.475,11.375c-0.7,1.225 -1.925,2.1 -3.15,2.45c-0.7,0.175 -1.05,0.175 -1.575,0.175zM123.725,50.925l21.175,12.25l3.85,-6.825v0c1.575,-2.8 2.1,-6.125 1.225,-9.275c-0.875,-3.15 -2.8,-5.775 -5.775,-7.35c-5.775,-3.325 -13.3,-1.4 -16.8,4.55z"></path></g></g></g><g fill="#d32f56"><g><g><path d="M146.825,75.6c-0.875,0 -1.75,-0.175 -2.625,-0.7c-2.45,-1.4 -3.325,-4.725 -1.925,-7.175l6.475,-11.375c1.75,-3.15 2.1,-7 0.875,-10.5c-1.05,-2.8 0.35,-5.775 3.15,-6.825c2.8,-1.05 5.775,0.35 6.825,3.15c2.45,6.475 1.75,13.475 -1.575,19.425l-6.475,11.375c-1.05,1.75 -2.8,2.625 -4.725,2.625z"></path></g></g></g></g></g></g></svg></td>  <!-- for an edit image -->
+					</tr>
+
+					<tr>
+						<td class="td1"><label for="user" class="label1">Email Address</label></td>
+						<td class="td2"><input id="email_address" disabled="disabled" type="text" class="input"></td>
+						<!-- This pencil icon is From https://icons8.com/icon/set/edit/metro -->					
+						<td></td>  <!-- for an edit image -->
+						<td><label for="user" class="label1">Phone Number</label></td>
+						<td class="td2"><input id="edit_phonenumber" disabled="disabled" type="text" class="input"></td>
+						<!-- This pencil icon is From https://icons8.com/icon/set/edit/metro -->											
+						<td><svg style="cursor: pointer;" onclick="delContact()" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+width="26" height="26"
+viewBox="0 0 224 224"
+style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,224v-224h224v224z" fill="none"></path><g fill="#e74c3c"><g id="surface1"><path d="M187.25,169.21154l-18.07211,18.03846c-3.29808,3.33173 -8.6827,3.33173 -12.01442,0l-45.16347,-45.12981l-45.12981,45.12981c-3.33173,3.33173 -8.75,3.33173 -12.04808,0l-18.07211,-18.03846c-3.33173,-3.33173 -3.33173,-8.71635 0,-12.04807l45.12981,-45.16347l-45.12981,-45.12981c-3.29807,-3.36538 -3.29807,-8.78365 0,-12.04808l18.07211,-18.07211c3.29808,-3.33173 8.71635,-3.33173 12.04808,0l45.12981,45.16347l45.16347,-45.16347c3.33172,-3.33173 8.75,-3.33173 12.01442,0l18.07211,18.03846c3.33173,3.33173 3.33173,8.75 0.03365,12.08173l-45.16346,45.12981l45.12981,45.16347c3.33173,3.33172 3.33173,8.71634 0,12.04807z"></path></g></g></g></svg></td>  <!-- for an edit image -->
+					</tr>
+					<tr>
+						<td class="td1"><label  for="user" class="label1">Occupation</label></td>
+						<td class="td2"><input id="edit_occupation" disabled="disabled" type="text" class="input"></td>
+						<!-- This pencil icon is From https://icons8.com/icon/set/edit/metro -->					
+						<td></td>  <!-- for an edit image -->
+						<td class="td1"><label for="user" class="label1">Company Name</label></td>
+						<td class="td2"><input id="edit_companyname" disabled="disabled" type="text" class="input"></td>
+						<!-- This pencil icon is From https://icons8.com/icon/set/edit/metro -->					
+						<td></td>  <!-- for an edit image -->
+					</tr>
+				</table></form>
+
+				<div class="group">
+					<input id="modifyButton" onclick="makeModifiedChanges()" type="submit" class="button" value="Modify">
+				</div>
+				<div class="group2">
+					<input onclick="goBackToContactList()" type="submit" class="button2" value="Back">
+				</div>
+				<div class="hr"></div>
+				<span id="signup_failed"></span>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<style>
+	.input
+	{
+		color: #d9b310 !important;
+		width:100% !important;
+	}
+	#editLable 
+	{	
+		display: inline-block;
+		border-bottom:2px solid transparent; 
+		border-color: #328cc1;
+		
+		position: relative;
+		left: 50%; 
+		
+		transform: translate(-50%);	
+	}
+	.editPencil
+	{
+		cursor: pointer; /* Makes each name clickable*/
+	}
+	
+	.td1
+	{
+		width:20%
+	}
+	.td2 /*	This Contains actual values (after labels) */
+	{
+		width:27%;
+
+	}
+
+	.signup-form .input{	
+		width:100%; 
+		background: #1d2731; 
+	}
+	#editingForm
+	{
+		outline: none;
+	}	
+	td .input{
+		border:none;
+		border-radius:25px;
+		background:rgba(255,255,255,.1);
+	}
+
+
+</style>
+  <script src="jquery-3.3.1.slim.js"></script> <!-- jquery library--> <!-- this has to go before the javascript-->
+  <script type="text/javascript" src="ContactSearchAndDisplay.js"></script>
+    <script type="application/javascript" src="js.cookie.js"></script>
+    <script>
+        function fillInputs()
+        {
+            document.getElementById("edit_firstname").value = Cookies.get('fName');
+            document.getElementById("edit_lastname").value = Cookies.get('lName');
+            document.getElementById("email_address").value = Cookies.get('Email');
+            document.getElementById("edit_phonenumber").value = Cookies.get('PhoneNum');
+            document.getElementById("edit_occupation").value = Cookies.get('Occupation');
+            document.getElementById("edit_companyname").value = Cookies.get('Company');
+            document.getElementById("LinkedUser").innerHTML = Cookies.get("LinkedID");
+            document.getElementById("ContactID").innerHTML = Cookies.get("contactID");      
+
+        }
+    function delContact()
+    {
+        console.log("testing in delContact");
+        
+        var url = "./mainPHP.php";
+        //// Update Name Cookies so that contact.html will be updated.
+        var i = Cookies.get(document.getElementById("ContactID").innerHTML + "index");
+        console.log("in del, i is " + i);
+        Cookies.set(i + "FName", "");
+        Cookies.set(i + "LName", "");   
+        ////  
+        
+		var http_request = new XMLHttpRequest();	
+        http_request.open("POST", url, false);
+		http_request.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+		
+		var currentContact = {apiRequestType: "deleteContact", ContactID: document.getElementById("ContactID").innerHTML};
+
+        var jsonPayload = JSON.stringify(currentContact);
+        console.log("id is " + currentContact.ContactID);
+        
+        try
+        {
+            http_request.send(jsonPayload);
+            var serverResponse = http_request.responseText;
+            console.log("Response is : " + serverResponse);
+            if (serverResponse == "Error")
+                console.log("Error in delete. Unable to delete");
+        }
+        catch(error)
+        {
+            console.log(error.message);
+        }
+        
+        goBackToContactList(); // go back to list
+    }
+    </script>
+</body>

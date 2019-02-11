@@ -1,0 +1,191 @@
+<head>
+<link href="contactcss.css" rel="stylesheet" id="bootstrap-css">
+<script type="application/javascript" src="js.cookie.js"></script>
+
+</head>
+
+<!------ Include the above in your HEAD tag ---------->
+<body onload="loadContacts()">
+  <div class="contact-wrap">
+	<div class="contact-html">
+		<!--<input id="contact" type="radio" name="tab" class="sign-in" checked>--><label id="editLable" for="tab-1" class="tab">Contacts</label>
+		<span id="linkedIDContent" style="display: none"></span>
+		<div class="contact-form">
+			<div class="sign-in-htm">
+				<div class="group">
+					<label for="user" class="label1">Search</label>
+					<input id="searchParam" type="text" class="input" onkeydown="getContactsUsingID(this)">
+				</div>
+
+				<div class="group">
+					<input type="submit" class="button" value="Make a new contact" onclick="goToMakeNewContactPage()">
+				</div>
+				<div class="group2">
+					<input type="submit" class="button2" value="log out" onclick="logoutApp()">
+				</div>
+				<div class="hr"></div>
+				<span id="contact_failed"></span>
+			</div>
+			
+		</div>
+		<div id="forTable">
+			<table id="cList"> <!-- style="border-width: 2px; border-color:black; border-style:solid; position: absolute; left: 50%; transform: translate(-50%); font-size:20px; padding-top:15px">-->
+			 
+				<tr class="listRows">
+					<td class="firstCol" onclick="openContactDetails(this)"><span id="test"></span> <span></span><span class="spanID" style="display: none"></span></td>
+					<td class ="cTDLIST" onclick="openContactDetails(this)"><span></span> <span></span><span class="spanID" style="display: none"></span></td>
+					<td class="cTDLIST" onclick="openContactDetails(this)"><span></span> <span></span><span class="spanID" style="display: none"></span></td>
+				</tr>
+				<tr class="listRows">
+					<td class="firstCol" onclick="openContactDetails(this)"><span></span> <span></span><span class="spanID" style="display: none"></span></td>
+					<td class="cTDLIST" onclick="openContactDetails(this)"><span></span> <span></span><span class="spanID" style="display: none"></span></td>
+					<td class="cTDLIST" onclick="openContactDetails(this)"><span></span> <span></span><span class="spanID" style="display: none"></span></td>
+				</tr>
+				<tr class="listRows">
+					<td class="firstCol" onclick="openContactDetails(this)"><span></span> <span></span><span class="spanID" style="display: none"></span></td>
+					<td class="cTDLIST" onclick="openContactDetails(this)"><span></span> <span></span><span class="spanID" style="display: none"></span></td>
+					<td class="cTDLIST" onclick="openContactDetails(this)"><span></span> <span></span><span class="spanID" style="display: none"></span></td>
+				</tr>
+				<tr class="listRows">
+					<td class="firstCol" onclick="openContactDetails(this)"><span></span><span></span><span class="spanID" style="display: none"></span></td>
+					<td class="cTDLIST" onclick="openContactDetails(this)"><span></span><span></span><span class="spanID" style="display: none"></span></td>
+					<td class="cTDLIST" onclick="openContactDetails(this)"><span></span><span></span><span class="spanID" style="display: none"></span></td>
+				</tr>
+				<tr class="listRows">
+					<td class="firstCol" onclick="openContactDetails(this)"><span></span><span></span><span class="spanID" style="display: none"></span></td>
+					<td class="cTDLIST" onclick="openContactDetails(this)"><span></span><span></span><span class="spanID" style="display: none"></span></td>
+					<td class="cTDLIST" onclick="openContactDetails(this)"><span></span><span></span><span class="spanID" style="display: none"></span></td>
+				</tr>
+				<tr class="listRows">
+					<td class="firstCol" onclick="openContactDetails(this)"><span></span><span></span><span class="spanID" style="display: none"></span></td>
+					<td class="cTDLIST" onclick="openContactDetails(this)"><span></span><span></span><span class="spanID" style="display: none"></span></td>
+					<td class="cTDLIST" onclick="openContactDetails(this)"><span></span> <span></span><span class="spanID" style="display: none"></span></td>
+				</tr>
+				
+			</table>
+		</div>
+	</div>
+</div>
+<style>
+	#cList
+	{
+		display: inline;
+		border-width: 2px; 
+		border-color:#d9b310; 
+		border-style:solid; 
+		position: absolute; 
+		left: 50%; /*helps move table so that it's horizontally centered*/
+		transform: translate(-50%); /*moves table so that it's horizontally centered*/
+		font-size:17px; 
+		margin-top:25px;
+		background-color:white;
+		color:#0b3c5D;
+		overflow-y: scroll;
+		height: 120px;
+		width:85%;
+	}
+	.cTDLIST
+	{
+		cursor: pointer; /* Makes each name clickable*/
+		padding-right: 10px; 
+		padding-left: 10px
+	}
+	.firstCol
+	{	
+		cursor: pointer; /* Makes each name clickable*/
+		padding-right: 10px; 
+		padding-left:40px
+	}
+	.cTDLIST:hover
+	{
+		color:#d9b310
+	}
+	.firstCol:hover
+	{
+		color:#d9b310
+	}
+
+	#editLable /* inner lablel */
+	{	
+		display: inline-block important!;
+		border-bottom:2px solid transparent; 
+		border-color: #328cc1;
+		
+		position: relative;
+		left: 50% important!; 
+		
+		transform: translate(-50%);	
+	}
+
+</style>
+  <script src="jquery-3.3.1.slim.js"></script> <!-- jquery library--> <!-- this has to go before the javascript-->
+  <script type="text/javascript" src="ContactSearchAndDisplay.js"></script>
+  <script type="application/javascript" src="js.cookie.js"></script>
+  
+  <script>
+      function loadContacts()
+      {
+          var nbrDeleted = 0; // will be either 0 or 1. 
+          document.getElementById("linkedIDContent").innerHTML = Cookies.get('linkedID');
+			var myTable = document.getElementById("cList");
+			
+			myTable.innerHTML = ""; // Clear Table. 
+			document.getElementById("forTable").appendChild(myTable);
+			
+			var nbrContacts = Cookies.get('nbrContacts');
+			
+			//console.log(nbrContacts);
+			
+			if (nbrContacts == 0)
+			{
+			    console.log("nbrContacts is 0");
+			    return;
+			}
+			for (var i = 0 ; i < nbrContacts; i++)
+			{
+			    console.log("i is " + i);
+				var firstAndLast = [];
+				
+				firstAndLast[0] = Cookies.get(i + "FName"); //= listOb.entireList[myIndex[i] * 2].split(" "); 
+				firstAndLast[1] = Cookies.get(i + "LName");
+				// if both are empty (were just deleted)
+				if ((firstAndLast[0] == "") && (firstAndLast[1] == ""))
+				{
+				    nbrDeleted++;
+				    continue;
+				}
+				td = document.createElement("td");
+				if (((i - nbrDeleted) % 3) == 0) // multiple of three means append a new row to table (not enough horizontal space for 4 names). 
+				{
+					tr = document.createElement("tr");	
+					tr.className = "listRows";
+					myTable.appendChild(tr);
+					td.className = "firstCol";
+				}
+				else
+					td.className = "cTDLIST";
+				td.setAttribute("onclick", "openContactDetails(this)");
+                console.log("inside loadContacts()");
+				// So separate the string into 2 elements and assign to firstAndLast
+
+				for (var j = 0; j < 2; j++)
+				{
+					span = document.createElement("span");
+					span.innerHTML = firstAndLast[j] + "&nbsp";
+					td.appendChild(span);
+				}
+				span = document.createElement("span");
+				span.innerHTML = Cookies.get(i + "ContactID");
+				span.className = "spanID";
+				span.setAttribute("hidden", true);			
+				td.appendChild(span);
+
+				tr.appendChild(td);
+				// first argument lets editContact.html know how to reference the ith index.
+    		    Cookies.set(Cookies.get(i + "ContactID") + "index", i); // for editContact.html to use.
+			}
+			
+      }
+      
+  </script>
+</body>
