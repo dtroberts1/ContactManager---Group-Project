@@ -1,0 +1,63 @@
+<head>
+<link href="signupcss.css" rel="stylesheet" id="bootstrap-css">
+<script type="application/javascript" src="js.cookie.js"></script>
+</head>
+
+
+<body>
+  <div class="signup-wrap">
+	<div class="signup-html">
+		<input id="signup" type="radio" name="tab" class="sign-in" checked> <label for="tab-1" class="tab">Sign Up</label>
+		
+		<div class="signup-form">
+			<div class="sign-in-htm">
+				<table>
+					<tr style = "margin-right: 50px;">
+					
+						<td><label for="fname" class="label1" style="margin-left: 70px;">First Name</label></td>
+						<td><input id="fname" type="text" class="input"
+						style="margin-right: 100px;"></td>
+					
+				</tr>
+				<tr>
+					
+						<td><label for="lname" class="label1" style="margin-left: 70px;">Last Name</label></td>
+						<td><input id="lname" type="text" class="input"></td>
+					
+				</tr>	
+					<tr>
+						<td><label for="user" class="label1" style="margin-left
+						:70px;">Username</label></td>
+						<td><input id="user" type="text" class="input"></td>
+					
+					<tr>
+				
+						<td><label for="pass" class="label1" style="margin-left: 70px;">Password</label></td>
+						<td><input id="pass" type="password" class="input" data-type="password"></td>
+					
+				</tr>
+				<tr>
+				
+						<td><label for="pass2" class="label1" style="margin-left: 70px;">Retype Password</label></td>
+						<td><input id="pass2" type="password" class="input" data-type="password"></td>
+					
+				</tr>
+				</table>
+
+				<div class="group">
+					<input type="submit" class="button" onclick="signUp()" value="Sign Up">
+				</div>
+				<div class="group2">
+					<input type="submit" class="button2" onclick="backToLogin()" value="Already have an account? Click to log in">
+				</div>
+				<div class="hr"></div>
+				<span id="signup_failed"></span>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="Registration.js"></script>
+
+</body>

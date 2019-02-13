@@ -1,0 +1,173 @@
+<head>
+  <link href="signupcss.css" rel="stylesheet" id="bootstrap-css">
+      <script src="js.cookie.js"></script>
+</head>
+
+<!------ Include the above in your HEAD tag ---------->
+<body id="testingid" onload="getLinkedID()">
+  <div class="signup-wrap" style="width:100%">
+	<div class="signup-html" id="signupDiv">
+		<label id="editLable" for="tab-1" class="tab">New Contact</label><span id="testingOutput"></span>
+		
+		<div class="signup-form">
+			<div class="sign-in-htm">
+			    <!-- First span (before table) identify the LinkedUser (not contactID since DB will provide this when creating contacts). It is not viewable -->
+			    
+    <span id="ContactID" style="display: none"></span>
+    <span id="LinkedUser" style="display: none"></span>			    
+			<form id="editingForm" tabindex="-1"> 
+				<table class="tableEditContact">
+				    
+					<tr >
+					  
+						<td class="td1"><label for="user" class="label1">First Name</label></td>
+						<td class="td2"><input type="text" id="edit_firstname"  class="newContactInput"></td> 
+               <!--         <td class="td2"><input type="text" id="edit_firstname" class="input"></td> -->
+						<!-- This pencil icon is From https://icons8.com/icon/set/edit/metro -->
+						<td></td>  <!-- for an edit image -->
+						<td class="td1"><label for="user" class="label1">Last Name</label></td>
+						<td class="td2"><input id="edit_lastname" type="text" class="newContactInput"></td>
+						<!-- This pencil icon is From https://icons8.com/icon/set/edit/metro -->						
+						<td></td>  <!-- for an edit image -->
+					</tr>
+
+					<tr>
+						<td class="td1"><label for="user" class="label1">Email Address</label></td>
+						<td class="td2"><input id="email_address" type="text" class="newContactInput"></td>
+						<!-- This pencil icon is From https://icons8.com/icon/set/edit/metro -->					
+						<td></td>  <!-- for an edit image -->
+						<td><label for="user" class="label1">Phone Number</label></td>
+						<td class="td2"><input id="edit_phonenumber"  type="text" class="newContactInput"></td>
+						<!-- This pencil icon is From https://icons8.com/icon/set/edit/metro -->											
+						<td></td>  <!-- for an edit image -->
+					</tr>
+					<tr>
+						<td class="td1"><label  for="user" class="label1">Occupation</label></td>
+						<td class="td2"><input id="edit_occupation" type="text" class="newContactInput"></td>
+						<!-- This pencil icon is From https://icons8.com/icon/set/edit/metro -->					
+						<td></td>  <!-- for an edit image -->
+						<td class="td1"><label for="user" class="label1">Company Name</label></td>
+						<td class="td2"><input id="edit_companyname" type="text" class="newContactInput"></td>
+						<!-- This pencil icon is From https://icons8.com/icon/set/edit/metro -->					
+						<td></td>  <!-- for an edit image -->
+					</tr>
+				</table></form>
+
+				<div class="group">
+					<input id="CreateContact" onclick="makeNewContact()" type="submit" class="button" value="Create">
+				</div>
+				<div class="group2">
+					<input onclick="goBackToContactList()" type="submit" class="button2" value="Back">
+				</div>
+				<div class="hr"></div>
+				<span id="signup_failed"></span>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<style>
+	.newContactInput
+	{
+		color: #d9b310 !important;
+		width:100% !important;
+	}
+	#editLable 
+	{	
+		display: inline-block;
+		border-bottom:2px solid transparent; 
+		border-color: #328cc1;
+		
+		position: relative;
+		left: 50%; 
+		
+		transform: translate(-50%);	
+	}
+	.editPencil
+	{
+		cursor: pointer; /* Makes each name clickable*/
+	}
+	
+	.td1
+	{
+		width:20%
+	}
+	.td2 /*	This Contains actual values (after labels) */
+	{
+		width:27%;
+
+	}
+
+	.signup-form .newContactInput{	
+		width:100%; 
+		background: #394149; 
+	}
+	#editingForm
+	{
+		outline: none;
+	}	
+	td .newContactInput{
+		border:none;
+		border-radius:25px;
+		background:rgba(255,255,255,.1);
+	}
+
+
+</style>
+  <script src="jquery-3.3.1.slim.js"></script> <!-- jquery library--> <!-- this has to go before the javascript-->
+  <script type="text/javascript" src="ContactSearchAndDisplay.js"></script>
+
+    <script>
+        function getLinkedID()
+        {
+            document.getElementById("LinkedUser").innerHTML = Cookies.get("LinkedID");
+ 
+        }
+	function makeNewContact() // Will be called from "Contacts" Page
+	{
+		// go to "edit contact" page. Will be called from "contacts" page
+		var url = "./mainPHP.php";
+		var http_request = new XMLHttpRequest();	
+		http_request.open("POST", url, false); 
+		http_request.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+		// First make object of contact attributes
+		// Note that span tags go by" innerHTML", inputs go by "value"
+		var currentContactWithRequestType = {apiRequestType: "makeNewContact",  LinkedUser: document.getElementById("LinkedUser").innerHTML, FName: document.getElementById("edit_firstname").value, LName: document.getElementById("edit_lastname").value, PhoneNum: document.getElementById("edit_phonenumber").value, Email: document.getElementById("email_address").value, Company: document.getElementById("edit_companyname").value, Occupation: document.getElementById("edit_occupation").value};
+		
+		// make call to server to get information about the contact that user selected
+		var jsonPayload = JSON.stringify(currentContactWithRequestType);
+        
+		try 
+		{
+		    
+			http_request.send(jsonPayload);
+            console.warn(http_request.responseText)			
+			console.log(http_request.responseText);
+
+    		// Note: the reason for the parse error { was because it was taking in the { of the 2nd contact
+    		var jsonObjReceived = JSON.parse(http_request.responseText);
+    		
+    		var nbrContacts = jsonObjReceived.contactList.length;
+    		// Adding sorting feature
+    		
+    		jsonObjReceived.contactList.sort(function(a,b)
+    		{
+    		    return (a.FName.toLowerCase() > b.FName.toLowerCase()) ? 1 : ((b.FName.toLowerCase() > a.FName.toLowerCase()) ? -1 : 0);
+    		});
+            Cookies.set("nbrContacts", nbrContacts);
+            Cookies.set("linkedID", jsonObjReceived.id);
+    		for (var i = 0; i < nbrContacts; i++)
+    		{
+    		    Cookies.set(i + "FName", jsonObjReceived.contactList[i]["FName"]);
+    		    Cookies.set(i + "LName", jsonObjReceived.contactList[i]["LName"]);
+    		    Cookies.set(i + "ContactID", jsonObjReceived.contactList[i]["ContactID"]);
+    		}
+    		window.open('./contact.html', "_self");
+		}
+		catch(err)
+		{
+			console.log(err.message);
+		}
+	}
+    </script>
+</body>
